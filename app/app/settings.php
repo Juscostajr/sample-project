@@ -18,7 +18,7 @@ return function (ContainerBuilder $containerBuilder) {
             'doctrine' => [
                 'dev_mode' => true,
                 'cache_dir' => __DIR__.'/../var/cache/doctrine',
-                'metadata_dirs' => [__DIR__.'/../src/Domain/User'],
+                'metadata_dirs' => [__DIR__.'/../src/Domain/User', __DIR__.'/../src/Domain/Shipping'],
                 'connection' => [
                     'driver' => 'pdo_mysql',
                     'host' => 'c-db-shipping',

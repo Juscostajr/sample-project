@@ -100,7 +100,7 @@ abstract class Action
     protected function get(string $name)
     {
         $content = json_decode($this->request->getBody()->getContents(),true);
-        if (empty($content[$name])) {
+        if ($content[$name] != 0 && empty($content[$name])) {
             throw new HttpBadRequestException($this->request, "Could not resolve argument `{$name}`.");
         }
 

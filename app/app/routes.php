@@ -1,6 +1,15 @@
 <?php
 declare(strict_types=1);
 
+use App\Application\Actions\Shipping\ListFreigthAction;
+use App\Application\Actions\Shipping\ListPricelistAction;
+use App\Application\Actions\Shipping\NewPricelistAction;
+use App\Application\Actions\Shipping\UpdatePricelistAction;
+use App\Application\Actions\Shipping\ViewPricelistAction;
+use App\Application\Actions\Shipping\ListShippingAction;
+use App\Application\Actions\Shipping\NewShippingAction;
+use App\Application\Actions\Shipping\UpdateShippingAction;
+use App\Application\Actions\Shipping\ViewShippingAction;
 use App\Application\Actions\User\AuthenticateAction;
 use App\Application\Actions\User\ListUsersAction;
 use App\Application\Actions\User\NewUserAction;
@@ -24,4 +33,24 @@ return function (App $app) {
         $group->post('/new/', NewUserAction::class);
         $group->put('/update/', UpdateUserAction::class);
     });
+
+    $app->group('/shipping', function (Group $group) {
+        $group->get('', ListShippingAction::class);
+        $group->get('/{id}', ViewShippingAction::class);
+        $group->post('/auth/', AuthenticateAction::class);
+        $group->post('/new/', NewShippingAction::class);
+        $group->put('/update/', UpdateShippingAction::class);
+    });
+
+    $app->group('/pricelist', function (Group $group) {
+        $group->get('', ListPricelistAction::class);
+        $group->get('/freight/{id}', ListFreigthAction::class);
+        $group->get('/{id}', ViewPricelistAction::class);
+        $group->post('/auth/', AuthenticateAction::class);
+        $group->post('/new/', NewPricelistAction::class);
+        $group->put('/update/', UpdatePricelistAction::class);
+    });
+
+
+
 };
