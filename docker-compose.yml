@@ -30,6 +30,16 @@ services:
       - ./db/data:/var/lib/mysql
     networks:
       - net
+  frontend:
+    build:
+      context: ./client/
+      dockerfile: ./Dockerfile
+    image: i-cli-shipping
+    container_name: c-cli-shipping
+    ports:
+      - "80:80"
+    volumes:
+      - ./client:/app
 networks:
   net:
     driver: bridge
