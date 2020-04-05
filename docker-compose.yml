@@ -1,0 +1,45 @@
+version: '2'
+services:
+  backend:
+    build:
+      context: ./app/
+      dockerfile: Dockerfile
+    image: i-srv-shipping
+    container_name: c-srv-shipping
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./app:/var/www
+    networks:
+      - net
+    depends_on:
+      - "mysql"
+  mysql:
+    build:
+      context: ./db/
+      dockerfile: ./Dockerfile
+    image: i-db-shipping
+    command: --innodb_use_native_aio=0
+    container_name: c-db-shipping
+    environment:
+      MYSQL_DATABASE: shipping
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/data:/var/lib/mysql
+    networks:
+      - net
+  frontend:
+    build:
+      context: ./client/
+      dockerfile: ./Dockerfile
+    image: i-cli-shipping
+    container_name: c-cli-shipping
+    ports:
+      - "80:80"
+    volumes:
+      - ./client:/app
+networks:
+  net:
+    driver: bridge
