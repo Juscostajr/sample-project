@@ -97,6 +97,16 @@ abstract class Action
         return $this->args[$name];
     }
 
+    protected function get(string $name)
+    {
+        $content = json_decode($this->request->getBody()->getContents(),true);
+        if ($content[$name] != 0 && empty($content[$name])) {
+            throw new HttpBadRequestException($this->request, "Could not resolve argument `{$name}`.");
+        }
+
+        return $content[$name];
+    }
+
     /**
      * @param  array|object|null $data
      * @return Response
