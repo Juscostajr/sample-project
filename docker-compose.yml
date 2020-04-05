@@ -12,6 +12,24 @@ services:
       - ./app:/var/www
     networks:
       - net
+    depends_on:
+      - "mysql"
+  mysql:
+    build:
+      context: ./db/
+      dockerfile: ./Dockerfile
+    image: i-db-shipping
+    command: --innodb_use_native_aio=0
+    container_name: c-db-shipping
+    environment:
+      MYSQL_DATABASE: shipping
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/data:/var/lib/mysql
+    networks:
+      - net
 networks:
   net:
     driver: bridge
