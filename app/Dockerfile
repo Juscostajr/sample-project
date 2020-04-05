@@ -6,5 +6,5 @@ RUN docker-php-ext-install pdo_mysql
 COPY composer*.json ./
 RUN composer install --no-dev
 COPY . .
-CMD php -S 0.0.0.0:8080 -t public
+CMD vendor/bin/doctrine orm:schema-tool:update && php -S 0.0.0.0:8080 -t public
 EXPOSE 8080
