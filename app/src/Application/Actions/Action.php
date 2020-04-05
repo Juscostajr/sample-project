@@ -99,12 +99,12 @@ abstract class Action
 
     protected function get(string $name)
     {
-        $this->request->getParsedBody()['username'];
-        if (!isset($this->request->getParsedBody()[$name])) {
+        $content = json_decode($this->request->getBody()->getContents(),true);
+        if (empty($content[$name])) {
             throw new HttpBadRequestException($this->request, "Could not resolve argument `{$name}`.");
         }
 
-        return $this->request->getParsedBody()[$name];
+        return $content[$name];
     }
 
     /**

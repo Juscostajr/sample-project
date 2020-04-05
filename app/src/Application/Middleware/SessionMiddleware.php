@@ -24,13 +24,15 @@ class SessionMiddleware implements Middleware
      */
     public function process(Request $request, RequestHandler $handler): Response
     {
-        $authorization = $request->getHeader('Authorization')[0];
+        if($request->getUri()->getPath() != '/users/auth/') {
+            $authorization = $request->getHeader('Authorization')[0];
 
-        if(is_null($authorization)) {
-            throw new HttpUnauthorizedException($request);
+            if (is_null($authorization)) {
+                throw new HttpUnauthorizedException($request);
+            }
+
+            $this->jwt->decode($authorization);
         }
-
-        $this->jwt->decode($authorization);
         return $handler->handle($request);
     }
 

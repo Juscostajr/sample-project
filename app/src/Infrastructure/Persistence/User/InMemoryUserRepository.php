@@ -7,7 +7,7 @@ use App\Domain\User\User;
 use App\Domain\User\UserNotFoundException;
 use App\Domain\User\UserRepository;
 
-class InMemoryUserRepository implements UserRepository
+class InMemoryUserRepository
 {
     /**
      * @var User[]
