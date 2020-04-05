@@ -1,6 +1,6 @@
 {
-    "name": "slim/slim-skeleton",
-    "description": "A Slim Framework skeleton application for rapid development",
+    "name": "juscostajr/sample-project",
+    "description": "A little skeleton projetc containig a single page application and a service based on driven domain design.",
     "keywords": [
         "microframework",
         "rest",
@@ -10,6 +10,10 @@
     "homepage": "http://github.com/slimphp/Slim-Skeleton",
     "license": "MIT",
     "authors": [
+        {
+            "name": "Juscelino Fenandes da Costa Junior",
+            "email": "juscostajr@gmail.com"
+        },
         {
             "name": "Josh Lockhart",
             "email": "info@joshlockhart.com",
@@ -22,9 +26,10 @@
         }
     ],
     "require": {
-        "ext-json": "*",
-        "monolog/monolog": "^1.24",
         "php": ">=7.1",
+        "ext-json": "*",
+        "doctrine/orm": "^2.7",
+        "monolog/monolog": "^1.24",
         "php-di/php-di": "^6.0",
         "slim/psr7": "^0.5",
         "slim/slim": "^4.1"
