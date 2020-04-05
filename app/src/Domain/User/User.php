@@ -4,41 +4,105 @@ declare(strict_types=1);
 namespace App\Domain\User;
 
 use JsonSerializable;
-
+use Doctrine\ORM\Mapping as ORM;
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="user")
+ */
 class User implements JsonSerializable
 {
     /**
      * @var int|null
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
      * @var string
+     * @ORM\Column(type="string")
      */
     private $username;
 
     /**
      * @var string
+     * @ORM\Column(type="string")
      */
     private $firstName;
 
     /**
      * @var string
+     * @ORM\Column(type="string")
      */
     private $lastName;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    private $password;
 
     /**
      * @param int|null  $id
      * @param string    $username
      * @param string    $firstName
      * @param string    $lastName
+     * @param Password    $password
      */
-    public function __construct(?int $id, string $username, string $firstName, string $lastName)
+
+    /**
+     * @var string
+     */
+    private $token;
+
+    public function __construct(?int $id, string $username, string $firstName, string $lastName, Password $password)
     {
         $this->id = $id;
         $this->username = strtolower($username);
         $this->firstName = ucfirst($firstName);
         $this->lastName = ucfirst($lastName);
+        $this->password = $password->encrypt();
+    }
+
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName(string $firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @param string $lastName
+     */
+    public function setLastName(string $lastName): void
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword(Password $password): void
+    {
+        $this->password = $password->encrypt();
+    }
+
+    /**
+     * @return string
+     */
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param string $token
+     */
+    public function setToken(string $token): void
+    {
+        $this->token = $token;
     }
 
     /**
@@ -74,6 +138,14 @@ class User implements JsonSerializable
     }
 
     /**
+     * @return string
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    /**
      * @return array
      */
     public function jsonSerialize()
@@ -83,6 +155,7 @@ class User implements JsonSerializable
             'username' => $this->username,
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
+            'token' => $this->token,
         ];
     }
 }

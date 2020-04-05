@@ -97,6 +97,16 @@ abstract class Action
         return $this->args[$name];
     }
 
+    protected function get(string $name)
+    {
+        $this->request->getParsedBody()['username'];
+        if (!isset($this->request->getParsedBody()[$name])) {
+            throw new HttpBadRequestException($this->request, "Could not resolve argument `{$name}`.");
+        }
+
+        return $this->request->getParsedBody()[$name];
+    }
+
     /**
      * @param  array|object|null $data
      * @return Response
