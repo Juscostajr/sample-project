@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Ahc\Jwt\JWT;
 use DI\ContainerBuilder;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,6 +13,9 @@ use Psr\Log\LoggerInterface;
 
 return function (ContainerBuilder $containerBuilder) {
     $containerBuilder->addDefinitions([
+        JWT::class => function(ContainerInterface $c): JWT {
+            return new JWT($c->get('settings')['jwt_key']);
+        },
         EntityManagerInterface::class => function (ContainerInterface $c): EntityManager {
             $doctrineSettings = $c->get('settings')['doctrine'];
 

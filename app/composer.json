@@ -28,6 +28,7 @@
     "require": {
         "php": ">=7.1",
         "ext-json": "*",
+        "adhocore/jwt": "^1.0",
         "doctrine/orm": "^2.7",
         "monolog/monolog": "^1.24",
         "php-di/php-di": "^6.0",
