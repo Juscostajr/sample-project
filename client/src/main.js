@@ -5,10 +5,14 @@ import App from './App.vue';
 import router from '@/router'
 import store from '@/store'
 import Axios from "axios";
+import Configuration from '@/config'
 Vue.use(ElementUI);
 
+
+const backendHost = Configuration.value('backendHost')
+
 Vue.prototype.$request = Axios.create({
-  baseURL: "http://192.168.99.100:8080/",
+  baseURL: backendHost,
   timeout: 20000,
   headers: {
     "Content-Type": "application/json"

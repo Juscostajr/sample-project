@@ -9,7 +9,7 @@ Vue.use(Router)
 
 const routes = [
     {
-        path: '/app/',
+        path: '/',
         component: Main,
         children: [
             {
@@ -22,12 +22,7 @@ const routes = [
                 name: 'shipping',
                 path: '/shipping/',
                 component: Shipping
-            },
-            {
-                name: 'home',
-                path: '/',
-                component: Shipping
-            },
+            }
         ]
     },
 
