@@ -119,7 +119,7 @@ class Shipping implements JsonSerializable
             'id' => $this->id,
             'product' => $this->product,
             'distance' => $this->distance,
-            'freight' => $this->freight
+            'weight' => $this->weight
         ];
     }
 }
