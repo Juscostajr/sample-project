@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use App\Application\Actions\OptionPrefligth;
 use App\Application\Actions\Shipping\ListFreigthAction;
 use App\Application\Actions\Shipping\ListPricelistAction;
 use App\Application\Actions\Shipping\NewPricelistAction;
@@ -28,27 +29,41 @@ return function (App $app) {
 
     $app->group('/users', function (Group $group) {
         $group->get('', ListUsersAction::class);
+        $group->options('', OptionPrefligth::class);
         $group->get('/{id}', ViewUserAction::class);
+        $group->options('/{id}', OptionPrefligth::class);
         $group->post('/auth/', AuthenticateAction::class);
+        $group->options('/auth/', OptionPrefligth::class);
         $group->post('/new/', NewUserAction::class);
+        $group->options('/new/', OptionPrefligth::class);
         $group->put('/update/', UpdateUserAction::class);
+        $group->options('/update/', OptionPrefligth::class);
+
     });
+
 
     $app->group('/shipping', function (Group $group) {
         $group->get('', ListShippingAction::class);
+        $group->options('', ListShippingAction::class);
         $group->get('/{id}', ViewShippingAction::class);
-        $group->post('/auth/', AuthenticateAction::class);
+        $group->options('/{id}', ViewShippingAction::class);
         $group->post('/new/', NewShippingAction::class);
+        $group->options('/new/', OptionPrefligth::class);
         $group->put('/update/', UpdateShippingAction::class);
+        $group->options('/update/', UpdateShippingAction::class);
     });
 
     $app->group('/pricelist', function (Group $group) {
         $group->get('', ListPricelistAction::class);
+        $group->options('', OptionPrefligth::class);
         $group->get('/freight/{id}', ListFreigthAction::class);
+        $group->options('/freight/{id}', OptionPrefligth::class);
         $group->get('/{id}', ViewPricelistAction::class);
-        $group->post('/auth/', AuthenticateAction::class);
+        $group->options('/{id}', OptionPrefligth::class);
         $group->post('/new/', NewPricelistAction::class);
+        $group->options('/new/', OptionPrefligth::class);
         $group->put('/update/', UpdatePricelistAction::class);
+        $group->options('/update/', OptionPrefligth::class);
     });
 
 

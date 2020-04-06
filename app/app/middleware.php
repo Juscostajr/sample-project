@@ -6,5 +6,5 @@ use Slim\App;
 
 return function (App $app) {
  //   $app->addBodyParsingMiddleware();
-    $app->add(SessionMiddleware::class);
+  //  $app->add(SessionMiddleware::class);
 };
