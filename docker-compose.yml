@@ -8,8 +8,6 @@ services:
     container_name: c-srv-shipping
     ports:
       - "8080:8080"
-    volumes:
-      - ./app:/var/www
     networks:
       - net
     depends_on:
