@@ -34,6 +34,8 @@ services:
       dockerfile: ./Dockerfile
     image: i-cli-shipping
     container_name: c-cli-shipping
+    environment:
+      VUE_API_HOST: http://192.168.99.100:8080
     ports:
       - "80:80"
     volumes:
